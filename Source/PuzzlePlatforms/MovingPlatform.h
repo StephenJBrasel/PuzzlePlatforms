@@ -22,6 +22,13 @@ public:
     virtual void Tick(float DeltaTime) override;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-        FVector Velocity = FVector(20, 0, 0);
+        float Velocity = 20;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", Meta = (MakeEditWidget = true))
+        FVector TargetLocation;
+
+private:
+    FVector GlobalTargetLocation;
+    FVector GlobalStartLocation;
 
 };
