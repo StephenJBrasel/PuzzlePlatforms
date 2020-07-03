@@ -8,28 +8,38 @@
 #include "PuzzlePlatformsGameInstance.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class PUZZLEPLATFORMS_API UPuzzlePlatformsGameInstance : public UGameInstance, public IMenuInterface
 {
 	GENERATED_BODY()
 
-public: 
+public:
 	UPuzzlePlatformsGameInstance(const FObjectInitializer& ObjectInitializer);
 
 	virtual void Init();
 
 	UFUNCTION(Exec)
-		void Host();
+		void Host() override;
 
 	UFUNCTION(Exec)
-		void Join(const FString& Address);
+		void Join(const FString& Address) override;
+
+	virtual void LoadMainMenu() override;
+
+	virtual void QuitGame() override;
 
 	UFUNCTION(BlueprintCallable)
 		void LoadMenu();
 
+	UFUNCTION(BlueprintCallable)
+		void LoadInGameMenu();
+
+
 private:
 	TSubclassOf<class UUserWidget> MenuClass;
+	TSubclassOf<class UUserWidget> InGameMenuClass;
 	class UMainMenu* Menu;
+	class UMenuWidget* InGameMenu;
 };
